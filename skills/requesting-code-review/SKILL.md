@@ -23,10 +23,11 @@ Dispatch a code reviewer subagent to catch issues before they cascade. The revie
 
 ## How to Request
 
-**1. Get git SHAs:**
+**1. Get revision range:**
 ```bash
-BASE_SHA=$(git rev-parse HEAD~1)  # or origin/main
-HEAD_SHA=$(git rev-parse HEAD)
+# Find the base revision (parent of your first change, or main bookmark)
+BASE_REV=$(jj log -r "main" --no-graph -T 'commit_id.short(12)' --limit 1)
+HEAD_REV=$(jj log -r "@" --no-graph -T 'commit_id.short(12)' --limit 1)
 ```
 
 **2. Dispatch code reviewer subagent:**
@@ -36,8 +37,9 @@ Use Task tool with `general-purpose` type, fill template at `code-reviewer.md`
 **Placeholders:**
 - `{DESCRIPTION}` - Brief summary of what you built
 - `{PLAN_OR_REQUIREMENTS}` - What it should do
-- `{BASE_SHA}` - Starting commit
-- `{HEAD_SHA}` - Ending commit
+- `{BASE_SHA}` - Starting revision (git commit ID for diff compatibility)
+- `{HEAD_SHA}` - Ending revision (git commit ID for diff compatibility)
+- `{DESCRIPTION}` - Brief summary
 
 **3. Act on feedback:**
 - Fix Critical issues immediately
@@ -52,8 +54,8 @@ Use Task tool with `general-purpose` type, fill template at `code-reviewer.md`
 
 You: Let me request code review before proceeding.
 
-BASE_SHA=$(git log --oneline | grep "Task 1" | head -1 | awk '{print $1}')
-HEAD_SHA=$(git rev-parse HEAD)
+BASE_REV=$(jj log -r "main" --no-graph -T 'commit_id.short(12)' --limit 1)
+HEAD_REV=$(jj log -r "@" --no-graph -T 'commit_id.short(12)' --limit 1)
 
 [Dispatch code reviewer subagent]
   DESCRIPTION: Added verifyIndex() and repairIndex() with 4 issue types
