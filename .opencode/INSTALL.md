@@ -3,6 +3,7 @@
 ## Prerequisites
 
 - [OpenCode.ai](https://opencode.ai) installed
+- jj (Jujutsu) or Git installed
 
 ## Installation
 

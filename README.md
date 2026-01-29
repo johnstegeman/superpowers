@@ -1,4 +1,6 @@
-# Superpowers
+# Superpowers (jj fork)
+
+> **This is a [jj (Jujutsu)](https://github.com/jj-vcs/jj)-adapted fork of [obra/superpowers](https://github.com/obra/superpowers).** All Git-specific commands and references in the skills have been converted to jj equivalents. The `jjify` branch contains the patch series on top of upstream. See the upstream repo for canonical documentation.
 
 Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them.
 
@@ -155,7 +157,7 @@ already use it in another harness.
 
 1. **brainstorming** - Activates before writing code. Refines rough ideas through questions, explores alternatives, presents design in sections for validation. Saves design document.
 
-2. **using-git-worktrees** - Activates after design approval. Creates isolated workspace on new branch, runs project setup, verifies clean test baseline.
+2. **using-jj-workspaces** - Activates after design approval. Creates isolated jj workspace, runs project setup, verifies clean test baseline.
 
 3. **writing-plans** - Activates with approved design. Breaks work into bite-sized tasks (2-5 minutes each). Every task has exact file paths, complete code, verification steps.
 
@@ -165,7 +167,7 @@ already use it in another harness.
 
 6. **requesting-code-review** - Activates between tasks. Reviews against plan, reports issues by severity. Critical issues block progress.
 
-7. **finishing-a-development-branch** - Activates when tasks complete. Verifies tests, presents options (merge/PR/keep/discard), cleans up worktree.
+7. **finishing-a-development-branch** - Activates when tasks complete. Verifies tests, presents options (integrate/PR/keep/discard), cleans up workspace.
 
 **The agent checks for relevant skills before any task.** Mandatory workflows, not suggestions.
 
@@ -187,7 +189,7 @@ already use it in another harness.
 - **dispatching-parallel-agents** - Concurrent subagent workflows
 - **requesting-code-review** - Pre-review checklist
 - **receiving-code-review** - Responding to feedback
-- **using-git-worktrees** - Parallel development branches
+- **using-jj-workspaces** - Isolated development workspaces
 - **finishing-a-development-branch** - Merge/PR decision workflow
 - **subagent-driven-development** - Fast iteration with two-stage review (spec compliance, then code quality)
 

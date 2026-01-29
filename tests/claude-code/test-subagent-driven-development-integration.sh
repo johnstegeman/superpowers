@@ -104,12 +104,10 @@ export function multiply(a, b) {
 **Verification:** `npm test`
 EOF
 
-# Initialize git repo
-git init --quiet
-git config user.email "test@test.com"
-git config user.name "Test User"
-git add .
-git commit -m "Initial commit" --quiet
+# Initialize jj repo
+jj git init --colocate
+jj desc -m "Initial commit"
+jj new
 
 echo ""
 echo "Project setup complete. Starting execution..."
@@ -264,13 +262,13 @@ else
 fi
 echo ""
 
-# Test 7: Git commits show proper workflow
-echo "Test 7: Git commit history..."
-commit_count=$(git -C "$TEST_PROJECT" log --oneline | wc -l)
-if [ "$commit_count" -gt 2 ]; then  # Initial + at least 2 task commits
-    echo "  [PASS] Multiple commits created ($commit_count total)"
+# Test 7: jj changes show proper workflow
+echo "Test 7: jj change history..."
+commit_count=$(jj log --no-graph -T 'change_id ++ "\n"' -R "$TEST_PROJECT" | grep -c .)
+if [ "$commit_count" -gt 2 ]; then  # Initial + at least 2 task changes
+    echo "  [PASS] Multiple changes created ($commit_count total)"
 else
-    echo "  [FAIL] Too few commits ($commit_count, expected >2)"
+    echo "  [FAIL] Too few changes ($commit_count, expected >2)"
     FAILED=$((FAILED + 1))
 fi
 echo ""

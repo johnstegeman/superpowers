@@ -11,8 +11,8 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 mkdir -p "$TARGET_DIR"
 cd "$TARGET_DIR"
 
-# Initialize git repo
-git init
+# Initialize jj repo
+jj git init --colocate
 
 # Copy design and plan
 cp "$SCRIPT_DIR/design.md" .
@@ -30,15 +30,15 @@ cat > .claude/settings.local.json << 'SETTINGS'
       "Bash(npm:*)",
       "Bash(npx:*)",
       "Bash(mkdir:*)",
-      "Bash(git:*)"
+      "Bash(jj:*)"
     ]
   }
 }
 SETTINGS
 
 # Create initial commit
-git add .
-git commit -m "Initial project setup with design and plan"
+jj desc -m "Initial project setup with design and plan"
+jj new
 
 echo "Scaffolded Svelte Todo project at: $TARGET_DIR"
 echo ""
